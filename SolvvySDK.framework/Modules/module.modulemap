@@ -1,0 +1,11 @@
+framework module SolvvySDK {
+  umbrella header "SolvvySDK.h"
+
+  export *
+  module * { export * }
+}
+
+module SolvvySDK.Swift {
+    header "SolvvySDK-Swift.h"
+    requires objc
+}
