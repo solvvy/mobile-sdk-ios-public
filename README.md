@@ -3,8 +3,11 @@ iOS version : iOS 10 and above.
 Current version: 1.0.2
 ## Getting Started
 ### Dynamic framework
-- Download the required version of SolvvySDK from https://gitlab.com/solvvy/mobile-sdk-ios-public/tree/allVersionsSDK and extract the zip file.  
+- Download the latest version of SolvvySDK from https://gitlab.com/solvvy/mobile-sdk-ios-public/tree/solvvySDK_1.0.2 and extract the zip file.  
 - Go to your Project Inspector General tab and scroll down to where it says, `Embedded Binaries.` Click the + button and then Add Other. A Finder window will drop down, and here you need to select the `SolvvySDK.framework`.
+
+`Note:` To download SolvvySDK of version 1.0.1, extract the zip from https://gitlab.com/solvvy/mobile-sdk-ios-public/tree/solvvySDK_1.0.1
+
 ### OR
 ### CocoaPods
 - Follow <https://guides.cocoapods.org/using/getting-started.html> to install cocoapods.
