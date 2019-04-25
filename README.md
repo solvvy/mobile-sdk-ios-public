@@ -3,8 +3,11 @@ iOS version : iOS 10 and above.
 Current version: 1.0.2
 ## Getting Started
 ### Dynamic framework
-- Download the required version of SolvvySDK from https://gitlab.com/solvvy/mobile-sdk-ios-public/tree/allVersionsSDK and extract the zip file.  
+- Download the latest version of SolvvySDK from https://gitlab.com/solvvy/mobile-sdk-ios-public/tree/solvvySDK_1.0.2 and extract the zip file.  
 - Go to your Project Inspector General tab and scroll down to where it says, `Embedded Binaries.` Click the + button and then Add Other. A Finder window will drop down, and here you need to select the `SolvvySDK.framework`.
+
+`Note:` To download SolvvySDK of version 1.0.1, extract the zip from https://gitlab.com/solvvy/mobile-sdk-ios-public/tree/solvvySDK_1.0.1
+
 ### OR
 ### CocoaPods
 - Follow <https://guides.cocoapods.org/using/getting-started.html> to install cocoapods.
@@ -281,7 +284,7 @@ return true
 ```
 
 #### Passing initial context
-`initialContext` is a dictionary of type [String: Any] which may contain the default value for the properties like` email`.
+`initialContext` is a dictionary of type [String: Any] which may contain the default value for the properties like `email`. This dictionary is passed to various methods such as `getSupportOptions`.
 
 Swift Code:
 ```swift
@@ -290,12 +293,14 @@ initialContext["email"] = "abc@solvvy.com"
 formSettings.initialContext = initialContext
 ```
 #### Hiding properties of initialContext
-`hidePropertyList` is an array of type [String] which contains value for the properties like  `email`, `subject`. Properties are hidden if present in initialContext and hidePropertyList.
+The app may want to pass additional properties while submitting a ticket. Such properties may be be pre-populated (Ex. email if it is already known) or they may have to be provided by the user. If the app populates these fields, it can hide them from being shown to the user by passing them as a collection of propertyIds in `hidePropertyList`. It is an array of type [String]. 
+
+Note that the properties sent while submitting a ticket need to be configured already in the CRM and the propertyIds used in the `initialContext` and `hidePropertyList` are the same as in the CRM.
 
 Swift Code:
 
 ```swift
-formSettings.hidePropertyList = ["email", "subject"]
+formSettings.hidePropertyList = ["email", "subject","custom_303132"]
 ```
 #### Using captcha
 `requireCaptcha` a boolean which indicates whether the app requires captcha support, which can be passed with `FormSettings`.
@@ -350,4 +355,10 @@ return  supportOptions;
 }
 ```
 
+#### Troubleshooting
+
+- You get an error like `this connector is not enabled for ticket submission...`. Please check to make sure the `connectorIdForTicketCreation` is configured correctly.
+
+#### Performance
+It is recommended that the Solvvy SDK is initialized (i.e. `startSolvvy` is called) only when needed and not on every app startup. `startSolvvy` is efficient, still initializing it every time the app starts up  maybe an unnecessary drag on app startup time.
 
