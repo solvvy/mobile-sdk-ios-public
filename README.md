@@ -1,12 +1,14 @@
 # Solvvy iOS SDK documentation
 iOS version : iOS 10 and above.
-Current version: 1.0.2
+Current version: 1.0.3
 ## Getting Started
 ### Dynamic framework
-- Download the latest version of SolvvySDK from https://gitlab.com/solvvy/mobile-sdk-ios-public/tree/solvvySDK_1.0.2 and extract the zip file.  
+- Download the latest version of SolvvySDK from https://gitlab.com/solvvy/mobile-sdk-ios-public/tree/solvvySDK_1.0.3 and extract the zip file.  
 - Go to your Project Inspector General tab and scroll down to where it says, `Embedded Binaries.` Click the + button and then Add Other. A Finder window will drop down, and here you need to select the `SolvvySDK.framework`.
 
-`Note:` To download SolvvySDK of version 1.0.1, extract the zip from https://gitlab.com/solvvy/mobile-sdk-ios-public/tree/solvvySDK_1.0.1
+`Note:`
+- To download SolvvySDK of version 1.0.1, extract the zip from https://gitlab.com/solvvy/mobile-sdk-ios-public/tree/solvvySDK_1.0.1
+- To download SolvvySDK of version 1.0.2, extract the zip from  https://gitlab.com/solvvy/mobile-sdk-ios-public/tree/solvvySDK_1.0.2
 
 ### OR
 ### CocoaPods
@@ -352,6 +354,66 @@ EmailOption *email = [[EmailOption alloc] init];
 [supportOptions addObject:email];
 
 return  supportOptions;
+}
+```
+### Instructions for Integrating SolvvySDK in Reactive Native App
+
+- Go to your Project Inspector's General tab and scroll down to where it says, Embedded Binaries. Click the + button and then Add Other. A Finder window will drop down, and here you need to select the SolvvySDK.framework.
+- Go into Build Settings -> At the top select All and Combined -> Under Build Options, set Always Embed Swift Standard Libraries to Yes.
+
+#### SolvvySDK Module Example
+- Native module is an Objective-C Solvvy class that implements the RCTBridgeModule protocol.
+
+```swift
+#import "React/RCTBridgeModule.h"
+@interface Solvvy : NSObject <RCTBridgeModule>
+@end
+```
+
+- @import SolvvySDK; -> Add import statement at the top of your Solvvy.m file.
+- In addition to RCTBridgeModule protocol, Solvvy class must also include the RCT_EXPORT_MODULE(). which takes an optional argument that specifies the name that the module will be accessible in JavaScript code.
+- RCT_EXPORT_METHOD() will expose methods of Solvvy to javascript.
+- Implement getSupportOptions SolvvySDKDelegate method.
+
+```swift
+@implementation Solvvy : NSObject
+RCT_EXPORT_MODULE();
+RCT_EXPORT_METHOD(helpButtonAction) {
+Persona *singlePersona = [[Persona alloc] initWithOrganisationId:YOUR_ORG_ID
+apiKey:@"YOUR_API_KEY" connectorIdForTicketCreation:@"YOUR_CONNECTOR_ID"
+buttonText:@""];
+FormSettings *formSettings = [[FormSettings alloc] init];
+formSettings.preContactForm = [[PreContactForm alloc] initWithShow:false
+fieldIdWhitelist:@[] instructionText:@""];
+formSettings.preQuestionForm = [[PreQuestionForm alloc] initWithShow:true
+fieldIdWhitelist:@[] instructionText:@""];
+formSettings.userSelectsForm = NO;
+formSettings.allowAttachments = YES;
+id objects[] = { @"abc@solvvy.com" };
+id keys[] = { @"email" };
+NSUInteger count = sizeof(objects) / sizeof(id);
+NSDictionary *initialContext = [NSDictionary dictionaryWithObjects:objects
+forKeys:keys
+count:count];
+formSettings.initialContext = initialContext;
+SolvvyParams *params = [[SolvvyParams alloc]
+initWithPersonaOptions:@[singlePersona] withFormSettings:formSettings];
+SolvvySDK *instance = [[SolvvySDK alloc] initWithParams:params error:nil];
+instance.delegate = self;
+AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication]
+delegate];
+[instance startSolvvyFromViewController:delegate.window.rootViewController
+withAppearance:nil];
+}
+```
+
+#### Now, to launch the Solvvy sdk from JavaScript file call the Solvvy method like this
+
+```swift
+import {NativeModules} from 'react-native'
+const solvvy = NativeModules.Solvvy;
+if (Platform.OS == 'ios') {
+solvvy.helpButtonAction()
 }
 ```
 
