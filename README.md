@@ -1,11 +1,11 @@
 # Solvvy iOS SDK documentation
-iOS version : iOS 10 and above.
-Current version: 1.0.5
+iOS version : iOS 13 and above.
+Current version: 1.1.0
 ## Release Notes
 - Fixed Analytics events issues.
 ## Getting Started
 ### Dynamic framework
-- Download the latest version of SolvvySDK from https://gitlab.com/solvvy/mobile-sdk-ios-public/tree/solvvySDK_1.0.5 and extract the zip file.  
+- Download the latest version of SolvvySDK from https://gitlab.com/solvvy/mobile-sdk-ios-public/tree/solvvySDK_1.1.0 and extract the zip file.  
 - Go to your Project Inspector General tab and scroll down to where it says, `Embedded Binaries.` Click the + button and then Add Other. A Finder window will drop down, and here you need to select the `SolvvySDK.framework`.
 
 `Note:` Following are the link to download earlier versions of Solvvy SDK
