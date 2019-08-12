@@ -13,15 +13,15 @@ Pod::Spec.new do |s|
   #  summary should be tweet-length, and the description more in depth.
   #
 s.name          = "SolvvySDK"
-s.version       = "5.0"
+s.version       = "5.1"
 s.summary       = "SolvvySDK is a framework"
-s.homepage      = "https://gitlab.com/solvvy"
+s.homepage      = "https://github.com/solvvy/mobile-sdk-ios-public"
 s.description   = "Aims to reimagine the customer experience through intelligent automation and machine learning"
 s.license       = "MIT"
 s.author        = { "solvvy" => "janaki@solvvy.com" }
-s.platform      = :ios, "9.0"
+s.platform      = :ios, "10.0"
 s.ios.vendored_frameworks = 'SolvvySDK.framework'
 s.swift_version = "5.0"
-s.source        = { :git => "https://gitlab.com/solvvy/mobile-sdk-ios-public.git", :tag => "#{s.version}" }
+s.source        = { :git => "https://github.com/solvvy/mobile-sdk-ios-public.git", :tag => "#{s.version}" }
 s.exclude_files = "Classes/Exclude"
 end
