@@ -13,6 +13,7 @@ Current version: 1.0.5
 - 1.0.2 - https://gitlab.com/solvvy/mobile-sdk-ios-public/tree/solvvySDK_1.0.2
 - 1.0.3 - https://gitlab.com/solvvy/mobile-sdk-ios-public/tree/solvvySDK_1.0.3
 - 1.0.4 - https://gitlab.com/solvvy/mobile-sdk-ios-public/tree/solvvySDK_1.0.4
+- 1.1.0 - https://gitlab.com/solvvy/mobile-sdk-ios-public/tree/solvvySDK_1.1.0
 
 ### OR
 ### CocoaPods
