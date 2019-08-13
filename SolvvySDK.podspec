@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   #  summary should be tweet-length, and the description more in depth.
   #
 s.name          = "SolvvySDK"
-s.version       = "5.1"
+s.version       = "5.1.1"
 s.summary       = "SolvvySDK is a framework"
 s.homepage      = "https://github.com/solvvy/mobile-sdk-ios-public"
 s.description   = "Aims to reimagine the customer experience through intelligent automation and machine learning"
