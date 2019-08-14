@@ -21,7 +21,7 @@ s.license       = "MIT"
 s.author        = { "solvvy" => "janaki@solvvy.com" }
 s.platform      = :ios, "10.0"
 s.ios.vendored_frameworks = 'SolvvySDK.framework'
-s.swift_version = "5.0"
+s.swift_version = "5.1"
 s.source        = { :git => "https://github.com/solvvy/mobile-sdk-ios-public.git", :tag => "#{s.version}" }
 s.exclude_files = "Classes/Exclude"
 end
