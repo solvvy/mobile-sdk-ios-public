@@ -14,6 +14,7 @@ Current version: 1.1.0
 - 1.0.3 - https://gitlab.com/solvvy/mobile-sdk-ios-public/tree/solvvySDK_1.0.3
 - 1.0.4 - https://gitlab.com/solvvy/mobile-sdk-ios-public/tree/solvvySDK_1.0.4
 - 1.1.0 - https://gitlab.com/solvvy/mobile-sdk-ios-public/tree/solvvySDK_1.1.0
+- 1.1.1 - https://gitlab.com/solvvy/mobile-sdk-ios-public/tree/solvvySDK_1.1.1
 
 ### OR
 ### CocoaPods
@@ -36,6 +37,7 @@ pod 'SolvvySDK', :git => "https://gitlab.com/solvvy/mobile-sdk-ios-public.git", 
 - `swift_4.1.2` for swift version 4.1.2
 - `swift_4.2.1` for swift version 4.2.1
 - `swift_5.0` for swift version 5.0
+- `swift_5.1` for swift version 5.1
 
 Further, Create a new `Run Script Phase` in your app’s target’s `Build Phases` and paste the following snippet in the script text field:
 ```
