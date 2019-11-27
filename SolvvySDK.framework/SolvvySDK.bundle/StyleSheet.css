@@ -31,6 +31,14 @@ a span {
         background-color: rgb(38,38,41);
         color: #FFFFFF;
     }
+    p{
+        color:#FFFFFF;
+    }
+    
+    span{
+        color:#FFFFFF;
+    }
+    
     a:link {
         color: #0096e2;
     }

@@ -1,0 +1,158 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)
+// swift-module-flags: -target armv7-apple-ios10.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name SolvvySDK
+import AVKit
+import Foundation
+import MessageUI
+import MobileCoreServices
+import Photos
+@_exported import SolvvySDK
+import Swift
+import UIKit
+import WebKit
+@objc public class FormSettings : ObjectiveC.NSObject {
+  @objc public var preContactForm: SolvvySDK.PreContactForm
+  @objc public var preQuestionForm: SolvvySDK.PreQuestionForm
+  @objc public var userSelectsForm: Swift.Bool
+  @objc public var allowAttachments: Swift.Bool
+  @objc public var requireCaptcha: Swift.Bool
+  @objc public var initialContext: [Swift.String : Any]
+  @objc public var customTicketFormId: Swift.String?
+  @objc public var hidePropertyList: [Swift.String]
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public protocol PreForm {
+  @objc var show: Swift.Bool { get set }
+  @objc var fieldIdWhitelist: [Swift.String] { get set }
+  @objc var instructionText: Swift.String? { get set }
+}
+@objc public class PreQuestionForm : ObjectiveC.NSObject, SolvvySDK.PreForm {
+  @objc public var show: Swift.Bool
+  @objc public var fieldIdWhitelist: [Swift.String]
+  @objc public var instructionText: Swift.String?
+  @objc override dynamic public init()
+  @objc public init(show: Swift.Bool, fieldIdWhitelist: [Swift.String], instructionText: Swift.String? = nil)
+  @objc deinit
+}
+@objc public class PreContactForm : ObjectiveC.NSObject, SolvvySDK.PreForm {
+  @objc public var show: Swift.Bool
+  @objc public var fieldIdWhitelist: [Swift.String]
+  @objc public var instructionText: Swift.String?
+  @objc override dynamic public init()
+  @objc public init(show: Swift.Bool, fieldIdWhitelist: [Swift.String], instructionText: Swift.String? = nil)
+  @objc deinit
+}
+@objc public protocol SolvvySDKDelegate : AnyObject {
+  @objc optional func configureChat(withChatOption: SolvvySDK.ChatOption, forContext: [Swift.String : Any])
+  @objc optional func configurePhoneCall(withPhoneCallOption: SolvvySDK.PhoneCallOption, forContext: [Swift.String : Any])
+  @objc optional func configureCustomContactOption(withCustomContactOption: SolvvySDK.CustomContactOption, forContext: [Swift.String : Any])
+  @objc optional func showQuestionSearch(forContext: [Swift.String : Any]) -> Swift.Bool
+  @objc optional func getSupportOptions(forContext: [Swift.String : Any]) -> [SolvvySDK.SupportOption]
+}
+@objc public class SolvvySDK : ObjectiveC.NSObject {
+  @objc weak public var delegate: SolvvySDK.SolvvySDKDelegate?
+  @objc public init(params: SolvvySDK.SolvvyParams) throws
+  @objc public func startSolvvy(fromViewController viewController: UIKit.UIViewController, withAppearance appearance: SolvvySDK.SolvvyAppearance? = nil)
+  @objc public func stopSolvvy()
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public class SolvvyParams : ObjectiveC.NSObject {
+  @objc public var personaOptions: [SolvvySDK.Persona]
+  @objc public var formSettings: SolvvySDK.FormSettings
+  @objc override dynamic public init()
+  @objc public init(withPersonaOptions personaOptions: [SolvvySDK.Persona])
+  @objc public init(withPersonaOptions personaOptions: [SolvvySDK.Persona], withFormSettings formSettings: SolvvySDK.FormSettings)
+  @objc public func setEnvironment(isDevEnvironment: Swift.Bool)
+  @objc public func setSupportEmail(withEmailId mailId: Swift.String) throws
+  @objc deinit
+}
+@objc public class SolvvyAppearance : ObjectiveC.NSObject {
+  @objc public init(withBackgroundColor backgroundColor: UIKit.UIColor, progressBarColor: UIKit.UIColor, themeColor: UIKit.UIColor, fontFamilyName fontName: Swift.String? = nil, navigationBarFontColor: UIKit.UIColor = UIColor.white) throws
+  @objc public func setNavigationBarTextColor(withColor color: UIKit.UIColor)
+  @objc deinit
+}
+@objc public class Persona : ObjectiveC.NSObject {
+  @objc public var orgId: Swift.Int
+  @objc public var apiKey: Swift.String
+  @objc public var connectorId: Swift.String
+  @objc public var buttonText: Swift.String?
+  @objc override dynamic public init()
+  @objc public init(withOrganisationId orgId: Swift.Int, apiKey: Swift.String, connectorIdForTicketCreation connectorId: Swift.String, buttonText: Swift.String? = nil)
+  @objc deinit
+}
+@objc public enum ContactType : Swift.Int {
+  case Email
+  case Chat
+  case Community
+  case Phone
+  case Custom
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public protocol SupportOption {
+  @objc var name: Swift.String? { get set }
+  @objc var type: SolvvySDK.ContactType { get set }
+  @objc var desc: Swift.String { get set }
+  @objc var icon: UIKit.UIImage? { get set }
+  @objc var buttonText: Swift.String { get set }
+}
+@objc public class EmailOption : ObjectiveC.NSObject, SolvvySDK.SupportOption {
+  @objc public var name: Swift.String?
+  @objc public var type: SolvvySDK.ContactType
+  @objc public var desc: Swift.String
+  @objc public var icon: UIKit.UIImage?
+  @objc public var buttonText: Swift.String
+  @objc override dynamic public init()
+  @objc public init(withName name: Swift.String)
+  @objc public convenience init(withName name: Swift.String, description: Swift.String)
+  @objc deinit
+}
+@objc public class PhoneCallOption : ObjectiveC.NSObject, SolvvySDK.SupportOption {
+  @objc public var name: Swift.String?
+  @objc public var type: SolvvySDK.ContactType
+  @objc public var phoneNumber: Swift.String?
+  @objc public var desc: Swift.String
+  @objc public var icon: UIKit.UIImage?
+  @objc public var buttonText: Swift.String
+  @objc public init(withPhoneNumber phoneNumber: Swift.String)
+  @objc public convenience init(withName name: Swift.String, description: Swift.String, phoneNumber: Swift.String)
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public class CommunityOption : ObjectiveC.NSObject, SolvvySDK.SupportOption {
+  @objc public var name: Swift.String?
+  @objc public var type: SolvvySDK.ContactType
+  @objc public var communityLink: Swift.String?
+  @objc public var desc: Swift.String
+  @objc public var icon: UIKit.UIImage?
+  @objc public var buttonText: Swift.String
+  @objc public init(withCommunityLink communityLink: Swift.String)
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public class ChatOption : ObjectiveC.NSObject, SolvvySDK.SupportOption {
+  @objc public var name: Swift.String?
+  @objc public var type: SolvvySDK.ContactType
+  @objc public var desc: Swift.String
+  @objc public var icon: UIKit.UIImage?
+  @objc public var buttonText: Swift.String
+  @objc override dynamic public init()
+  @objc public convenience init(withName name: Swift.String, description: Swift.String)
+  @objc deinit
+}
+@objc public class CustomContactOption : ObjectiveC.NSObject, SolvvySDK.SupportOption {
+  @objc public var name: Swift.String?
+  @objc public var type: SolvvySDK.ContactType
+  @objc public var desc: Swift.String
+  @objc public var icon: UIKit.UIImage?
+  @objc public var buttonText: Swift.String
+  @objc public init(withName name: Swift.String)
+  @objc public convenience init(withName name: Swift.String, description: Swift.String)
+  @objc override dynamic public init()
+  @objc deinit
+}
