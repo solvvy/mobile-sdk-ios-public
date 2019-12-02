@@ -19,7 +19,7 @@ s.homepage      = "https://github.com/solvvy/mobile-sdk-ios-public"
 s.description   = "Aims to reimagine the customer experience through intelligent automation and machine learning"
 s.license       = "MIT"
 s.author        = { "solvvy" => "janaki@solvvy.com" }
-s.platform      = :ios, "11.0"
+s.platform      = :ios, "10.0"
 s.ios.vendored_frameworks = 'SolvvySDK.framework'
 s.swift_version = "5.1"
 s.source        = { :git => "https://github.com/solvvy/mobile-sdk-ios-public.git", :tag => "#{s.version}" }
